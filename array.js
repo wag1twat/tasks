@@ -217,10 +217,6 @@ class List {
 
     return result;
   }
-
-  getList() {
-    return this.#list;
-  }
 }
 
 const list = new List(1, 43, 6, 7, 90, 10);
