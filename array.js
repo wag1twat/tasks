@@ -20,6 +20,14 @@ class List {
     return target;
   }
 
+  #_get(target, idx) {
+    return idx >= 0 ? target[idx] : target[target.length - Math.abs(idx)];
+  }
+
+  at(idx) {
+    return this.#_get(this.#list, idx);
+  }
+
   push(...args) {
     this.#list = this.#_push(this.#list, ...args);
     return this.#list;
@@ -124,6 +132,92 @@ class List {
     return index;
   }
 
+  forEach(callack) {
+    const target = structuredClone(this.#list);
+
+    for (var i = 0; i < target.length; i++) {
+      callack(target[i], i);
+    }
+  }
+
+  includes(...args) {
+    let result = 0;
+
+    for (var i = 0; i < args.length; i++) {
+      if (this.findIndex((item) => item === args[i]) !== -1) {
+        result++;
+      }
+    }
+
+    return Boolean(result === args.length);
+  }
+
+  fill(value, start = 0, end = this.#list.length - 1) {
+    const l = end + 1;
+
+    for (var i = start; i < l; i++) {
+      this.#list[i] = value;
+    }
+
+    return this.#list;
+  }
+
+  flat() {
+    const target = [];
+
+    for (var i = 0; i < this.#list.length; i++) {
+      if (Array.isArray(this.#list[i])) {
+        let idx = -1;
+
+        while (idx++ < this.#list[i].length - 1) {
+          this.#_push(target, this.#list[i][idx]);
+        }
+      } else {
+        this.#_push(target, this.#list[i]);
+      }
+    }
+
+    return target;
+  }
+
+  join(separator = "") {
+    let result = "";
+
+    this.forEach((el, i) => {
+      result += i > 0 && i < this.#list.length ? separator + el : el;
+    });
+
+    return result;
+  }
+
+  some(comparator) {
+    let result = false;
+
+    for (var i = 0; i < this.#list.length; i++) {
+      if (comparator(this.#list[i])) {
+        result = true;
+        break;
+      }
+    }
+
+    return result;
+  }
+
+  every(comparator) {
+    let result = false;
+
+    for (var i = 0; i < this.#list.length; i++) {
+      if (comparator(this.#list[i])) {
+        result = true;
+      } else {
+        result = false;
+        break;
+      }
+    }
+
+    return result;
+  }
+
   getList() {
     return this.#list;
   }
@@ -142,3 +236,15 @@ const list = new List(1, 43, 6, 7, 90, 10);
 // console.log(list.map(String));
 // console.log(list.find((item) => item === 10));
 // console.log(list.findIndex((item) => item === 7));
+// console.log(
+//   list.forEach((item) => {
+//     console.log(item);
+//   })
+// );
+// console.log(list.includes(1, 7));
+// console.log(list.fill("x", 3, 4));
+// console.log(list.flat());
+// console.log(list.join("x"));
+// console.log(list.at(-2));
+// console.log(list.some((item) => item === 1));
+// console.log(list.every((item) => typeof item === "number"));
