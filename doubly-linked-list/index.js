@@ -127,6 +127,7 @@ function writeTestResultsToFile(filename = "test-results.txt") {
         const nativeAvg =
           nativeResults.reduce((sum, r) => sum + r.time, 0) /
           nativeResults.length;
+        // не учтены накладные расходы на преобразование массива в двусвязный список
         const customAvg =
           customResults.reduce((sum, r) => sum + r.time, 0) /
           customResults.length;
