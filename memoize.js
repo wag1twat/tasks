@@ -1,28 +1,28 @@
 // примитивная генерация ключа без учета больших входных параметров
 function key(args) {
-  return JSON.stringify(args);
+    return JSON.stringify(args);
 }
 
 function memoize(fn) {
-  var cache = new Map();
+    var cache = new Map();
 
-  return function (...args) {
-    const k = key(args);
+    return function (...args) {
+        const k = key(args);
 
-    const exist = cache.get(k);
+        const exist = cache.get(k);
 
-    if (exist) {
-      console.log("memo");
-      return exist;
-    }
+        if (exist) {
+            console.log('memo');
+            return exist;
+        }
 
-    const result = fn(...args);
+        const result = fn(...args);
 
-    cache.set(k, result);
+        cache.set(k, result);
 
-    console.log("new");
-    return result;
-  };
+        console.log('new');
+        return result;
+    };
 }
 
 const summary = memoize((a, b) => a.x + b.x);

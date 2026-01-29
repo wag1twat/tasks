@@ -1,15 +1,15 @@
 function Book() {
-  this.type = "book";
+    this.type = 'book';
 }
 
 const book = new Book();
 
 function HarryPotter() {
-  this.title = "Harry Potter";
+    this.title = 'Harry Potter';
 
-  this.getType = function () {
-    return this.type;
-  };
+    this.getType = function () {
+        return this.type;
+    };
 }
 
 const harryPotter = new HarryPotter();

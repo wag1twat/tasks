@@ -1,27 +1,27 @@
-export function weightForWeight(str = "") {
-  if (!str) return "";
+export function weightForWeight(str = '') {
+    if (!str) return '';
 
-  return str
-    .split(" ")
-    .sort((a, b) => {
-      const weightA = doSummaryOfNumberString(a);
-      const weightB = doSummaryOfNumberString(b);
+    return str
+        .split(' ')
+        .sort((a, b) => {
+            const weightA = doSummaryOfNumberString(a);
+            const weightB = doSummaryOfNumberString(b);
 
-      return weightA === weightB ? a.localeCompare(b) : weightA - weightB;
-    })
-    .join(" ");
+            return weightA === weightB ? a.localeCompare(b) : weightA - weightB;
+        })
+        .join(' ');
 }
 
-function doSummaryOfNumberString(str = "") {
-  if (!str) return 0;
+function doSummaryOfNumberString(str = '') {
+    if (!str) return 0;
 
-  let index = -1;
+    let index = -1;
 
-  let result = 0;
+    let result = 0;
 
-  while (index++ < str.length - 1) {
-    result += +str[index];
-  }
+    while (index++ < str.length - 1) {
+        result += +str[index];
+    }
 
-  return result;
+    return result;
 }
